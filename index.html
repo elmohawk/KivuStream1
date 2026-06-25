@@ -1,0 +1,1103 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KIVUSTREAM- Stream Movies & Series</title>
+  <meta name="description" content="Watch trending movies, anime and series online on KivuStream.">
+  <meta name="keywords" content="movies, series, anime, streaming">
+  <meta name="theme-color" content="#050816">
+  <link rel="icon" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta property="og:title"
+content="KivuStream">
+
+<meta property="og:description"
+content="Watch trending movies, series and anime online.">
+
+<link rel="icon"
+      href="https://kivustream.mrhawk2007.workers.dev/logo.png?v=2">
+  
+<meta property="og:image"
+      content="https://kivustream.mrhawk2007.workers.dev/logo.png?v=2">
+
+<meta property="og:url"
+      content="https://kivustream.mrhawk2007.workers.dev">
+
+<meta property="og:site_name"
+      content="KivuStream">
+
+<meta property="og:type"
+      content="website">
+
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta name="twitter:image"
+      content="https://kivustream.mrhawk2007.workers.dev/logo.png?v=2">
+<meta property="og:type"
+content="website">
+
+<meta name="robots"
+content="index, follow">
+</head>
+<body>
+  <main>
+  <!-- BLUE GRID BACKGROUND -->
+  <div class="bg-grid"></div>
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+    <!-- BACK BUTTON (hidden on home via JS or CSS) -->
+    <button class="back-btn" onclick="goBack()">
+      ←
+    </button>
+  <!-- HEADER -->
+<header class="main-header">
+    <a href="/" class="logo-wrap">
+        <img
+            src="https://kivustream.mrhawk2007.workers.dev/logo.png?v=2"
+            alt="KivuStream Logo"
+            class="site-logo"
+            width="60"
+            height="60"
+        >
+
+        <span class="site-title">
+            KIVU<span class="accent">Stream</span>
+        </span>
+    </a>
+
+   <nav class="navbar">
+
+    <a href="index.html#movies">Movies</a>
+    <a href="index.html#series">Series</a>
+    <a href="index.html#trending">Trending</a>
+    <a href="index.html#support">Support</a>
+
+  </nav>
+    <!-- RIGHT CONTROLS -->
+  <div class="nav-right">
+
+    <input id="search-input" type="text" placeholder="Search movies...">
+    <div id="search-results"
+     class="search-results">
+</div>
+
+   <button class="profile-btn"
+        onclick="openAdminLogin()">
+
+    👤
+
+</button>
+
+    <button id="theme-toggle">🌙</button>
+
+    <!-- MOBILE MENU BUTTON -->
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  </div>
+
+  </header>
+
+  <!-- =========================
+     PREMIUM HERO SECTION
+========================= -->
+  <section class="hero-section">
+    <!-- BACKGROUND -->
+    <div id="hero-slider" class="hero-slider">
+    </div>
+    <!-- OVERLAY -->
+    <div class="hero-overlay"></div>
+    <!-- CONTENT -->
+    <div class="hero-content">
+      <!-- BADGE -->
+      <span id="hero-badge" class="hero-badge">
+  🔥 #1 STREAMING NOW
+</span>
+      <!-- TITLE -->
+      <h1 id="hero-title">
+        Loading...
+
+      </h1>
+
+      <!-- META -->
+
+      <div class="hero-meta">
+
+        <span>⭐ 9.8 Rating</span>
+        <span>HD</span>
+        <span>2026</span>
+        <span>Action</span>
+
+      </div>
+
+      <!-- DESCRIPTION -->
+      <p id="hero-description">
+        Unlimited Movies & Series
+      </p>
+      <!-- BUTTONS -->
+      <div class="hero-buttons">
+        <button class="hero-watch-btn" onclick="watchHero()">
+
+          ▶ Watch Now
+
+        </button>
+
+        <button class="hero-info-btn" onclick="openHeroInfo()">
+
+          ℹ More Info
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- SCROLL EFFECT -->
+
+    <div class="hero-fade"></div>
+    <!-- HERO CONTROLS -->
+
+    <div class="hero-controls">
+
+      <!-- PREV -->
+
+      <button class="hero-control prev-btn" onclick="prevHero()">
+
+        ❮
+
+      </button>
+
+      <!-- NEXT -->
+
+      <button class="hero-control next-btn" onclick="nextHero()">
+
+        ❯
+
+      </button>
+
+    </div>
+    <div class="hero-dots">
+
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+
+    </div>
+
+   <div class="hero-video">
+ <iframe
+    id="heroTrailer"
+    class="hero-trailer"
+    src=""
+    frameborder="0"
+    allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+    referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
+
+  <button id="muteTrailer" class="mute-btn">
+    🔇
+  </button>
+</div>
+
+    </div>
+  </section>
+
+<!-- =========================
+     RECENTLY ADDED
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>
+🔥 Recently Added
+</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('recent')">
+
+View All →
+
+</button>
+
+</div>
+
+<div
+id="recent-slider"
+class="movies-row">
+
+</div>
+
+</section>
+<!-- =========================
+     LATEST SERIES
+========================= -->
+
+<section class="section" id="latestSeries">
+
+<div class="section-header">
+
+<h2>📺 Latest Series</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('series')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="series-container" class="movies-row"></div>
+
+</section>
+
+
+<!-- =========================
+     ACTION
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>⚡ Action</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Action')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="action-container" class="movies-row"></div>
+
+</section>
+<!-- =========================
+     INDIA
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>🇮🇳 Indian</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Indian')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="indian-container" class="movies-row"></div>
+
+</section>
+<!-- =========================
+     HORROR
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>👻 Horror</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Horror')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="horror-container" class="movies-row"></div>
+
+</section>
+
+
+<!-- =========================
+     COMEDY
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>😂 Comedy</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Comedy')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="comedy-container" class="movies-row"></div>
+
+</section>
+<!-- =========================
+    ROMANCE
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>❤️ Romance</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Romance')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="romance-container" class="movies-row"></div>
+
+</section>
+<!-- =========================
+     DRAMA
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>🎭 Drama</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Drama')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="drama-container" class="movies-row"></div>
+
+</section>
+<!-- =========================
+     CRIME
+========================= -->
+<section class="section">
+
+<div class="section-header">
+
+<h2>🔫 Crime</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Crime')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="crime-container" class="movies-row"></div>
+
+</section>
+<!-- =========================
+     SCI-FI
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>🚀 Sci-Fi</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Sci-Fi')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="scifi-container" class="movies-row"></div>
+
+</section>
+
+
+<!-- =========================
+     HIGHSCHOOL
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>🏫 HighSchool</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('HighSchool')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="highschool-container" class="movies-row"></div>
+
+</section>
+
+
+<!-- =========================
+     ANIMATION
+========================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+<h2>✨ Animation</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Animation')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="animation-container" class="movies-row"></div>
+
+</section
+  <!-- =========================
+   TV SERIES
+========================= -->
+<section class="section">
+
+<div class="section-header">
+
+<h2>📺 TV Series</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('TV Series')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="tvseries-container" class="movies-row"></div>
+
+</section>
+  <!-- =========================
+   OTHER MOVIES
+========================= -->
+  <section class="section">
+
+<div class="section-header">
+
+<h2>🎥 Other Movies</h2>
+
+<button
+class="view-all-btn"
+onclick="openSection('Other Movies')">
+
+View All →
+
+</button>
+
+</div>
+
+<div id="othermovies-container" class="movies-row"></div>
+
+</section>
+  <!-- =========================
+     ABOUT & SUPPORT PRO
+========================= -->
+ <section class="help-support" id="support">
+
+    <h2 class="help-title">
+        🛠 Help & Support
+    </h2>
+
+    <div class="help-grid">
+
+        <!-- Email -->
+        <div class="help-card">
+            <div class="help-icon">✉️</div>
+
+            <h3>Email Support</h3>
+
+            <p>Get help via email anytime</p>
+
+            <a href="mailto:mrhawk2007@gmail.com"
+               class="help-btn">
+                Send Email
+            </a>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="help-card">
+            <div class="help-icon">💬</div>
+
+            <h3>WhatsApp Support</h3>
+
+            <p>Chat with us directly</p>
+
+            <a href="https://wa.me/250794669266"
+               target="_blank"
+               class="help-btn">
+                Open Chat
+            </a>
+        </div>
+
+        <!-- Fast Response -->
+        <div class="help-card">
+            <div class="help-icon">⚡</div>
+
+            <h3>Fast Response</h3>
+
+            <p>Usually replies within minutes</p>
+
+            <span class="status-badge">
+                24/7 Available
+            </span>
+        </div>
+
+    </div>
+
+</section>
+  <!-- =========================
+     PREMIUM FOOTER
+========================= -->
+<footer class="footer">
+
+    <div class="footer-wrapper">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+
+            <h2 class="footer-logo">
+                Kivu<span>Stream</span>
+            </h2>
+
+            <p class="footer-description">
+                Unlimited Streaming • Premium Entertainment • Cinematic Experience
+            </p>
+
+            <p class="footer-description">
+                Stream trending movies, series, anime and entertainment everywhere.
+                Watch the latest movies, TV shows and anime in HD quality.
+            </p>
+
+        </div>
+
+        <!-- Explore -->
+        <div class="footer-explore">
+
+            <h3>Explore</h3>
+
+            <a href="#movies" class="explore-card">
+                🎬 Movies
+            </a>
+
+            <a href="#series" class="explore-card">
+                📺 Series
+            </a>
+
+            <a href="#support" class="explore-card">
+                🛠 Support
+            </a>
+
+        </div>
+
+        <!-- Follow -->
+        <div class="footer-follow">
+
+            <h3>Follow Us</h3>
+
+            <div class="phone-number">
+                📞 +250 794 669 266
+            </div>
+
+            <div class="footer-social-grid">
+
+                <a href="https://wa.me/250794669266" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+
+                <a href="https://www.tiktok.com/@mrhawk733" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+
+                <a href="https://x.com/mrhawk2007" target="_blank">
+                    <i class="fab fa-x-twitter"></i>
+                    <span>X</span>
+                </a>
+
+                <a href="https://www.facebook.com/mrhawk734" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </a>
+
+                <a href="https://www.instagram.com/hawk_mrperfect/" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+
+                <a href="https://youtube.com/@mrhawk_rw" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+
+                <a href="https://t.me/it_hawk_rw" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+
+        <div class="footer-bottom-content">
+
+            <span>
+                © 2026 KivuStream • Built By IT HAWK_RW
+            </span>
+
+            <div class="footer-bottom-links">
+                <a href="/terms.html">📜 Terms</a>
+                <a href="/privacy.html">🔒 Privacy Policy</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- FLOATING BUTTONS -->
+
+<a href="tel:+250794669266" class="call-float">
+    📱
+</a>
+
+<a href="https://wa.me/250794669266"
+   class="whatsapp-float"
+   target="_blank">
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+         alt="WhatsApp">
+
+</a>
+          <!-- =========================
+     ADMIN LOGIN MODAL
+========================= -->
+
+          <div id="admin-login" class="admin-modal">
+
+            <div class="admin-login-card">
+
+              <button class="close-btn" onclick="closeAdminLogin()">
+
+                ✕
+
+              </button>
+
+              <h1>🎬 𝐆𝐞𝐭 𝐏𝐫𝐨 𝐀𝐂𝐂𝐄𝐒𝐒</h1>
+
+              <p>
+                Secure Dashboard Login
+              </p>
+
+              <input type="email" id="admin-email" placeholder="Your Email">
+
+              <input type="password" id="admin-password" placeholder="Password">
+
+              <button id="admin-login-btn" onclick="adminLogin()" class="admin-login-btn">
+
+                Enter Dashboard
+
+              </button>
+
+              <p id="admin-msg"></p>
+
+            </div>
+
+          </div>
+
+          <!-- =========================
+     ADMIN DASHBOARD
+========================= -->
+         <section id="admin-panel"
+style="display:none;">
+
+            <!-- TOP BAR -->
+
+            <div class="admin-topbar">
+
+              <div>
+
+                <h1>🎬 Streaming Dashboard</h1>
+
+                <p>
+                  Manage movies, series & episodes
+                </p>
+
+              </div>
+
+              <button onclick="adminLogout()" class="logout-btn">
+
+                Logout
+
+              </button>
+
+            </div>
+
+            <!-- STATS -->
+
+            <div class="admin-stats">
+
+              <div class="stat-box">
+                <h2 id="movies-count">0</h2>
+                <p>Movies</p>
+              </div>
+
+              <div class="stat-box">
+                <h2 id="series-count">0</h2>
+                <p>Series</p>
+              </div>
+
+              <div class="stat-box">
+                <h2 id="episodes-count">0</h2>
+                <p>Episodes</p>
+              </div>
+
+              <!-- =========================
+     WEBSITE LOGO UPLOAD
+========================= -->
+
+              <div class="logo-upload-box">
+
+                <!-- PREVIEW -->
+
+                <div class="logo-preview-wrap">
+
+                  <img id="site-logo" src="logo.png" alt="Website Logo">
+
+                </div>
+
+                <!-- FILE INPUT -->
+
+                <input type="file" id="logoFile" accept="image/*" hidden>
+
+                <!-- BUTTONS -->
+
+                <div class="logo-actions">
+
+                  <button class="logo-upload-btn" onclick="document.getElementById('logoFile').click()">
+
+                    ⬆ Upload Logo
+
+                  </button>
+
+                  <button class="logo-save-btn" onclick="saveLogo()">
+
+                    💾 Save Logo
+
+                  </button>
+
+                </div>
+
+                <p class="logo-note">
+                  PNG • JPG • WEBP Supported
+                </p>
+
+              </div>
+              <!-- =========================
+     UPLOAD MOVIE / SERIES PRO
+========================= -->
+
+              <div class="admin-card admin-only">
+
+                <h2>🎥 Upload Movie / Series</h2>
+
+                <div class="admin-grid">
+
+                  <!-- TITLE -->
+                  <input id="movie-title" placeholder="Movie Title">
+
+                  <!-- DESCRIPTION -->
+                  <textarea id="movie-description" placeholder="Description"></textarea>
+
+                  <!-- CATEGORY -->
+                  <select id="movie-category">
+                    <option>Action</option>
+                    <option>Drama</option>
+                    <option>Comedy</option>
+                    <option>Animation</option>
+                    <option>Horror</option>
+                    <option>Sci-Fi</option>
+                    <option>HighSchool</option>
+                  </select>
+
+                  <!-- TYPE -->
+                  <select id="movie-type">
+
+                    <option value="movie">
+                      Movie
+                    </option>
+
+                    <option value="series">
+                      Series
+                    </option>
+
+                  </select>
+
+                  <!-- TRANSLATOR -->
+                  <input id="movie-translator" placeholder="Translator">
+
+                  <!-- =========================
+     POSTER UPLOAD
+========================= -->
+                  <div class="upload-box">
+
+                    <label class="upload-label">
+                      🎬 Poster Image
+                    </label>
+
+                    <input type="file" id="movie-poster-file" accept="image/*">
+
+                    <div class="upload-preview-box">
+
+                      <img id="poster-preview" class="upload-preview" src="" alt="Poster Preview">
+
+                      <span class="upload-placeholder">
+                        Upload Poster
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                  <!-- =========================
+     BANNER UPLOAD
+========================= -->
+                  <div class="upload-box">
+
+                    <label class="upload-label">
+                      🖼 Banner Image
+                    </label>
+
+                    <input type="file" id="movie-banner-file" accept="image/*">
+
+                    <div class="upload-preview-box banner-box">
+
+                      <img id="banner-preview" class="upload-preview" src="" alt="Banner Preview">
+
+                      <span class="upload-placeholder">
+                        Upload Banner
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                  <!-- =========================
+     VIDEO UPLOAD
+========================= -->
+                  <div class="upload-box">
+
+                    <label class="upload-label">
+                      🎥 Video File
+                    </label>
+
+                    <input type="file" id="movie-video-file" accept="video/*">
+
+                    <div class="video-upload-info">
+
+                      <span>MP4 • MOV • WEBM</span>
+
+                    </div>
+
+                  </div>
+
+                  <!-- DOWNLOAD URL -->
+                  <input id="movie-download" placeholder="Download Link">
+
+                </div>
+
+                <button onclick="uploadMoviePro()" class="upload-btn">
+                  🚀 Upload Content
+                </button>
+
+              </div>
+         <div class="admin-card">
+
+<h2>
+📺 Create Series
+</h2>
+
+<input
+id="series-title"
+placeholder="Series Title">
+
+<textarea
+id="series-description"
+placeholder="Description">
+</textarea>
+
+<input
+type="file"
+id="series-image-file">
+
+<input
+type="file"
+id="series-banner-file">
+
+<select id="series-category">
+
+<option>Action</option>
+<option>Drama</option>
+<option>Comedy</option>
+<option>Animation</option>
+<option>Horror</option>
+<option>HighSchool</option>
+
+</select>
+
+<button
+onclick="createSeries()">
+
+Create Series
+
+</button>
+
+</div>
+              <!-- EPISODE PANEL -->
+              <div class="admin-card admin-only">
+
+                <h2>📺 Manage Series Episodes</h2>
+
+                <div class="admin-grid">
+
+                <input
+id="series-id"
+placeholder="Series ID">
+
+<select id="series-select" onchange="loadSeasons(this.value)">
+                    <option value="">
+                      Select Series
+                    </option>
+
+                  </select>
+
+                  <input id="episode-number" type="number" placeholder="Episode Number">
+
+                  <input id="episode-title" placeholder="Episode Title">
+
+                  <input id="episode-video" placeholder="Video URL">
+
+                  <input id="episode-download" placeholder="Download URL">
+
+                </div>
+
+                <button class="episode-btn" onclick="addEpisode()">
+                  ➕ Add Episode
+                </button>
+                <div id="admin-episodes-list"></div>
+
+              </div>
+              <!-- =========================
+     MANAGE CONTENT
+========================= -->
+
+              <div class="panel manage-panel admin-only">
+
+                <div class="manage-header">
+
+                  <h3>
+                    🎬 Manage Movies & Series
+                  </h3>
+
+                  <input id="manage-search" placeholder="Search movie or series..." oninput="loadManageContent()">
+
+                </div>
+
+                <div id="manage-content-list" class="manage-grid">
+                  <div class="loading">Loading content...</div>
+                </div>
+
+              </div>
+              <div class="mobile-nav hide">
+
+<a href="/">
+<i class="fas fa-house"></i>
+<span>Home</span>
+</a>
+
+<a href="#latestMovies">
+<i class="fas fa-film"></i>
+<span>Movies</span>
+</a>
+
+<a href="#latestSeries">
+<i class="fas fa-tv"></i>
+<span>Series</span>
+</a>
+
+<a href="#support">
+<i class="fas fa-headset"></i>
+<span>Support</span>
+</a>
+
+</div>
+
+<button class="mobile-nav-toggle">
+
+<i class="fas fa-bars"></i>
+
+</button>
+</main>
+ <!-- APP JS -->
+             <script src="./script.js"></script>
+
+</body>
+
+</html>
